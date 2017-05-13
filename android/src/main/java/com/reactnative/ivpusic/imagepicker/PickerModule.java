@@ -83,8 +83,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
 
     // Light Blue 500
     private final String DEFAULT_WIDGET_COLOR = "#03A9F4";
-    private int width = 200;
-    private int height = 200;
+    private int maxWidth = 200;
+    private int maxHeight = 200;
 
     private int ratioX = 1;
     private int ratioY = 1;
@@ -115,8 +115,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         mediaType = options.hasKey("mediaType") ? options.getString("mediaType") : mediaType;
         multiple = options.hasKey("multiple") && options.getBoolean("multiple");
         includeBase64 = options.hasKey("includeBase64") && options.getBoolean("includeBase64");
-        width = options.hasKey("width") ? options.getInt("width") : width;
-        height = options.hasKey("height") ? options.getInt("height") : height;
+        maxWidth = options.hasKey("maxWidth") ? options.getInt("maxWidth") : maxWidth;
+        maxHeight = options.hasKey("maxHeight") ? options.getInt("maxHeight") : maxHeight;
         cropping = options.hasKey("cropping") ? options.getBoolean("cropping") : cropping;
         cropperActiveWidgetColor = options.hasKey("cropperActiveWidgetColor") ? options.getString("cropperActiveWidgetColor") : cropperActiveWidgetColor;
         cropperStatusBarColor = options.hasKey("cropperStatusBarColor") ? options.getString("cropperStatusBarColor") : cropperStatusBarColor;
@@ -583,7 +583,7 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         configureCropperColors(options);
 
         UCrop.of(uri, Uri.fromFile(new File(this.getTmpDir(activity), UUID.randomUUID().toString() + ".jpg")))
-                .withMaxResultSize(width, height)
+                .withMaxResultSize(maxWidth, maxHeight)
                 .withAspectRatio(ratioX, ratioY)
                 .withOptions(options)
                 .start(activity);
